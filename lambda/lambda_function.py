@@ -46,31 +46,22 @@ class MetronomoIntentHandler(AbstractRequestHandler):
 
     intervalo = 60 / bpm
 
-    def __init__(self):
-        self.should_continue = True
-
-    """Handler for Hello World Intent."""
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
         return ask_utils.is_intent_name("MetronomoIntent")(handler_input)
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        def play_metronome():
-            while self.should_continue:
-                speak_output = '<audio src="soundbank://soundlibrary/alarms/beeps_and_bloops/bell_03"/>'
-                handler_input.response_builder.speak(speak_output).ask(speak_output)
-                handler_input.response_builder.set_should_end_session(True)
-                handler_input.response_builder.response
 
-                time.sleep(self.intervalo)
+        speak_output = '<audio src="soundbank://soundlibrary/alarms/beeps_and_bloops/bell_03"/>'
 
-        threading.Thread(target=play_metronome).start()
+        while True:
+            time.sleep(self.intervalo)
 
-        return handler_input.response_builder.response
+            handler_input.response_builder.speak(speak_output).ask(speak_output)
+            response = handler_input.response_builder.response
 
-    def stop(self):
-        self.should_continue = False
+            return response
 
 class HelpIntentHandler(AbstractRequestHandler):
     """Handler for Help Intent."""
@@ -104,6 +95,7 @@ class CancelOrStopIntentHandler(AbstractRequestHandler):
         return (
             handler_input.response_builder
                 .speak(speak_output)
+                .set_should_end_session(True)
                 .response
         )
 
