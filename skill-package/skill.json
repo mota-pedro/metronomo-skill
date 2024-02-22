@@ -1,0 +1,41 @@
+{
+  "manifest": {
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "arn:aws:lambda:us-east-1:395441564472:function:8dfed025-44bb-40ec-977a-6b930b00253f:Release_0"
+        },
+        "interfaces": [],
+        "locales": {},
+        "regions": {
+          "NA": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-east-1:395441564472:function:8dfed025-44bb-40ec-977a-6b930b00253f:Release_0"
+            }
+          },
+          "EU": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:eu-west-1:395441564472:function:8dfed025-44bb-40ec-977a-6b930b00253f:Release_0"
+            }
+          },
+          "FE": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-west-2:395441564472:function:8dfed025-44bb-40ec-977a-6b930b00253f:Release_0"
+            }
+          }
+        }
+      }
+    },
+    "manifestVersion": "1.0",
+    "publishingInformation": {
+      "distributionCountries": [],
+      "isAvailableWorldwide": true,
+      "locales": {
+        "pt-BR": {
+          "name": "Metrônomo"
+        }
+      },
+      "testingInstructions": "Sample Testing Instructions."
+    }
+  }
+}
