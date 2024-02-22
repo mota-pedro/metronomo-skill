@@ -20,15 +20,11 @@
         },
         {
           "slots": [],
-          "name": "HelloWorldIntent",
+          "name": "MetronomoIntent",
           "samples": [
-            "olá",
-            "como vai você",
-            "diga oi mundo",
-            "diga oi",
-            "oi",
-            "diga olá mundo",
-            "diga olá"
+            "definir metrônomo",
+            "começar metrônomo",
+            "metrônomo"
           ]
         },
         {

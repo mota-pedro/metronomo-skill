@@ -27,7 +27,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Welcome, you can say Hello or Help. Which would you like to try?"
+        speak_output = "Olá! Para começar basta dizer algo como 'Definir metrônomo em 60 bpm'"
 
         return (
             handler_input.response_builder
@@ -37,15 +37,15 @@ class LaunchRequestHandler(AbstractRequestHandler):
         )
 
 
-class HelloWorldIntentHandler(AbstractRequestHandler):
+class MetronomoIntentHandler(AbstractRequestHandler):
     """Handler for Hello World Intent."""
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("HelloWorldIntent")(handler_input)
+        return ask_utils.is_intent_name("MetronomoIntent")(handler_input)
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Hello World!"
+        speak_output = "Metrônomo iniciado!"
 
         return (
             handler_input.response_builder
@@ -63,7 +63,7 @@ class HelpIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "You can say hello to me! How can I help?"
+        speak_output = "Como posso ajudar?"
 
         return (
             handler_input.response_builder
@@ -82,7 +82,7 @@ class CancelOrStopIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Goodbye!"
+        speak_output = "Até a próxima!"
 
         return (
             handler_input.response_builder
@@ -99,8 +99,8 @@ class FallbackIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         logger.info("In FallbackIntentHandler")
-        speech = "Hmm, I'm not sure. You can say Hello or Help. What would you like to do?"
-        reprompt = "I didn't catch that. What can I help you with?"
+        speech = "Não tenho certeza. Tente dizer algo como 'Definir metrônomo em 60 bpm'"
+        reprompt = "Não entendi essa. Como posso ajudar?"
 
         return handler_input.response_builder.speak(speech).ask(reprompt).response
 
@@ -131,7 +131,7 @@ class IntentReflectorHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         intent_name = ask_utils.get_intent_name(handler_input)
-        speak_output = "You just triggered " + intent_name + "."
+        speak_output = "Você ativou " + intent_name + "."
 
         return (
             handler_input.response_builder
@@ -154,7 +154,7 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
         # type: (HandlerInput, Exception) -> Response
         logger.error(exception, exc_info=True)
 
-        speak_output = "Sorry, I had trouble doing what you asked. Please try again."
+        speak_output = "Erro ao definir o metrônomo. Tente novamente."
 
         return (
             handler_input.response_builder
@@ -171,7 +171,7 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
 sb = SkillBuilder()
 
 sb.add_request_handler(LaunchRequestHandler())
-sb.add_request_handler(HelloWorldIntentHandler())
+sb.add_request_handler(MetronomoIntentHandler())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(FallbackIntentHandler())
