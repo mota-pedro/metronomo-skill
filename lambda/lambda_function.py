@@ -14,6 +14,9 @@ from ask_sdk_core.handler_input import HandlerInput
 
 from ask_sdk_model import Response
 
+import time
+import threading
+
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
@@ -38,6 +41,14 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
 
 class MetronomoIntentHandler(AbstractRequestHandler):
+
+    bpm = 60
+
+    intervalo = 60 / bpm
+
+    def __init__(self):
+        self.should_continue = True
+
     """Handler for Hello World Intent."""
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
@@ -45,15 +56,21 @@ class MetronomoIntentHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Metrônomo iniciado!"
+        def play_metronome():
+            while self.should_continue:
+                speak_output = '<audio src="soundbank://soundlibrary/alarms/beeps_and_bloops/bell_03"/>'
+                handler_input.response_builder.speak(speak_output).ask(speak_output)
+                handler_input.response_builder.set_should_end_session(True)
+                handler_input.response_builder.response
 
-        return (
-            handler_input.response_builder
-                .speak(speak_output)
-                # .ask("add a reprompt if you want to keep the session open for the user to respond")
-                .response
-        )
+                time.sleep(self.intervalo)
 
+        threading.Thread(target=play_metronome).start()
+
+        return handler_input.response_builder.response
+
+    def stop(self):
+        self.should_continue = False
 
 class HelpIntentHandler(AbstractRequestHandler):
     """Handler for Help Intent."""
