@@ -60,7 +60,7 @@ class MetronomoIntentHandler(AbstractRequestHandler):
             while self.should_continue:
                 speak_output = '<audio src="soundbank://soundlibrary/alarms/beeps_and_bloops/bell_03"/>'
                 handler_input.response_builder.speak(speak_output).ask(speak_output)
-                handler_input.response_builder.set_should_end_session(True)
+                handler_input.response_builder.set_should_end_session(False)
                 handler_input.response_builder.response
 
                 time.sleep(self.intervalo)
