@@ -6,6 +6,7 @@
 # This sample is built using the handler classes approach in skill builder.
 import logging
 import ask_sdk_core.utils as ask_utils
+import requests 
 
 from ask_sdk_core.skill_builder import SkillBuilder
 from ask_sdk_core.dispatch_components import AbstractRequestHandler
@@ -53,7 +54,11 @@ class MetronomoIntentHandler(AbstractRequestHandler):
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
 
-        speak_output = '<audio src="soundbank://soundlibrary/alarms/beeps_and_bloops/bell_03"/>'
+        requisicao = requests.get("https://7488-143-202-127-109.ngrok-free.app/api/metronomo/id/1")
+
+        requisicaoJson = requisicao.json()
+        
+        speak_output = requisicaoJson['url']
 
         while True:
             time.sleep(self.intervalo)
