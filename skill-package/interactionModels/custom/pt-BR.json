@@ -30,6 +30,12 @@
         {
           "name": "AMAZON.FallbackIntent",
           "samples": []
+        },
+        {
+          "name": "AMAZON.ActivateAction<object@PlaybackMode>"
+        },
+        {
+          "name": "AMAZON.DeactivateAction<object@PlaybackMode>"
         }
       ],
       "types": [],
